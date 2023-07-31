@@ -124,7 +124,6 @@ tfoot td {
     font-weight: bold;
 }
 
-
 /* Lien de retour */
 .back-link a {
     color: #007BFF;
@@ -133,4 +132,12 @@ tfoot td {
 
 .back-link a:hover {
     text-decoration: underline;
+}
+
+/* Style pour le message d'erreur */
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
 }
