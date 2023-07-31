@@ -13,14 +13,17 @@ session_start();
     <nav class="menu">
         <ul>
             <li><a href="index.php">Ajouter un produit</a></li>
-            <li><a href="recap.php">Récapitulatif des produits</a></li>
+            <!-- Lien pour afficher le récapitulatif des produits en session, avec le nombre de produits -->
+            <li><a href="recap.php">Récapitulatif des produits <?php echo '(' . (isset($_SESSION['products']) ? count($_SESSION['products']) : 0) . ')'; ?></a></li>
         </ul>
     </nav>
     <?php
+        // Vérifie s'il y a des produits en session ou si la session est vide
         if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
             echo "<p>Aucun produit en session ...</p>";
         }
         else{
+            // Affiche un tableau avec le récapitulatif des produits
             echo "<table>",
                 "<thead>",
                     "<tr>",
@@ -35,6 +38,7 @@ session_start();
                 
             $totalGeneral = 0;
             foreach($_SESSION['products'] as $index => $product){
+                // Affiche chaque produit dans une ligne du tableau
                 echo "<tr>",
                         "<td>" .$index. "</td>",
                         "<td>" .$product['name']."</td>",
@@ -42,8 +46,10 @@ session_start();
                         "<td>" .$product['qtt']."</td>",
                         "<td>" .number_format($product['total'], 2 , ",", "&nbsp;")."&nbsp;€ </td>",
                     "</tr>";
+                // Calcule le prix total général de tous les produits
                 $totalGeneral+= $product['total'];
             }
+             // Affiche le prix total général à la fin du tableau
             echo "<tr>",
                     "<td colspan='4'> Total général : </td>",
                     "<td><strong>" .number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€ </strong></td>",

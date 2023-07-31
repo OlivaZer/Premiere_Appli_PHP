@@ -10,11 +10,12 @@
     <nav class="menu">
         <ul>
             <li><a href="index.php">Ajouter un produit</a></li>
-            <li><a href="recap.php">Récapitulatif des produits</a></li>
+             <!-- Lien pour afficher le récapitulatif des produits en session, avec le nombre de produits -->
+            <li><a href="recap.php">Récapitulatif des produits <?php echo '(' . (isset($_SESSION['products']) ? count($_SESSION['products']) : 0) . ')'; ?></a></li>
         </ul>
     </nav>
     <h1>Ajouter un produit</h1>
-    <from action="traitement.php" method="post">
+    <form action="traitement.php" method="post">
         <p>
             <label>
                 Nom du produit :
@@ -36,6 +37,6 @@
         <p>
             <input type="submit" name="submit" value="Ajouter le produit">
         </p>
-    </from>
+    </form>
 </body>
 </html>
