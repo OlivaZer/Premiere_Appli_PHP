@@ -21,6 +21,13 @@ session_start();
     </nav>
 
     <?php
+    // Afficher le message de notification si présent dans la session
+    if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
+        echo '<p class="notification-message">' . $_SESSION['message'] . '</p>';
+        // Effacer le message de la session pour éviter de l'afficher plusieurs fois
+        unset($_SESSION['message']);
+    }
+
     if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
         // Afficher un message si aucun produit n'a été ajouté dans la session
         echo "<p>Aucun produit en session ...</p>"; 

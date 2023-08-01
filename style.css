@@ -134,10 +134,27 @@ tfoot td {
     text-decoration: underline;
 }
 
+.success-message {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+}
+
 /* Style pour le message d'erreur */
 .error-message {
     color: red;
     font-weight: bold;
     text-align: center;
     margin: 10px 0;
+}
+
+/* Style pour le message de notification */
+.notification-message {
+    background-color: #b3ffd9;
+    color: #007BFF;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
 }

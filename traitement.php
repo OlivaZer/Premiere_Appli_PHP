@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         );
 
         $_SESSION['products'][] = $product;
-        $_SESSION['message'] = "Le produit a été ajouté avec succès.";
+        $_SESSION['message'] = '<p class="success-message">Le produit a été ajouté avec succès.</p>';
     }
 }
 
@@ -38,6 +38,7 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     switch ($action) {
+        //Ce cas permet de supprimer le produit sélectionné de la session. Si un index valide est spécifié dans l'URL, le produit correspondant est supprimé de la session. Sinon, un message d'erreur est stocké dans la session pour informer l'utilisateur de l'indice invalide.
         case 'supprimer':
             // Supprimer le produit sélectionné de la session
             if (isset($_GET['index']) && is_numeric($_GET['index'])) {
@@ -53,11 +54,13 @@ if (isset($_GET['action'])) {
                 $_SESSION['message'] = 'Erreur : Indice de produit manquant ou invalide.';
             }
             break;
+           // Cela permet d'effacer tous les produits de la session en remplaçant le tableau 'products' par un nouveau tableau vide. Un message de succès est stocké dans la session pour informer l'utilisateur que tous les produits ont été supprimés avec succès.
         case 'effacerTous':
             // Effacer tous les produits de la session
             $_SESSION['products'] = array();
             $_SESSION['message'] = 'Tous les produits ont été supprimés avec succès.';
             break;
+        //Ce cas permet d'incrémenter la quantité du produit sélectionné de 1. Le nouveau nombre de produits est mis à jour, et le prix total du produit est recalculé en multipliant le nouveau nombre de produits par le prix unitaire. Un message de succès est stocké dans la session pour informer l'utilisateur que la quantité du produit a été augmentée avec succès.
         case 'increment':
             // Incrémenter la quantité du produit
             if (isset($_GET['index']) && is_numeric($_GET['index'])) {
@@ -69,6 +72,7 @@ if (isset($_GET['action'])) {
                 }
             }
             break;
+        // Ce cas permet de décrémenter la quantité du produit sélectionné de 1, à condition que la quantité reste supérieure à 1. Le nouveau nombre de produits est mis à jour, et le prix total du produit est recalculé en multipliant le nouveau nombre de produits par le prix unitaire. Un message de succès est stocké dans la session pour informer l'utilisateur que la quantité du produit a été diminuée avec succès. Si la quantité est déjà de 1 ou moins, aucune action n'est effectuée.
         case 'decrement':
             // Décrémenter la quantité du produit (assurez-vous que la quantité ne devienne pas négative)
             if (isset($_GET['index']) && is_numeric($_GET['index'])) {
@@ -82,19 +86,20 @@ if (isset($_GET['action'])) {
                 }
             }
             break;
+        //Ce cas est exécuté si aucune action spécifiée ou action non reconnue n'est passée dans l'URL. Il ne fait rien et garantit que si une action inconnue est passée dans l'URL, elle est simplement ignorée.
         default:
-            // Aucune action valide spécifiée
+            // Si aucune action spécifiée ou action non reconnue, ne rien faire.
             break;
     }
 }
 
-// Redirection vers "recap.php" après le traitement de l'action ou l'ajout de produit
-if (isset($_GET['action'])) {
-    header("Location: recap.php");
-} else {
-    // Redirection vers "index.php" après l'ajout de produit
-    header("Location: index.php");
-}
+    // Redirection vers "recap.php" après le traitement de l'action ou l'ajout de produit
+    if (isset($_GET['action'])) {
+        header("Location: recap.php");
+    } else {
+        // Redirection vers "index.php" après l'ajout de produit
+        header("Location: index.php");
+    }
 exit();
 
 ?>
