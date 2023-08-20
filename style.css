@@ -158,3 +158,21 @@ tfoot td {
     margin: 10px 0;
     border-radius: 4px;
 }
+/* Style pour le signe + ( incrementer )*/
+.decrement_style{
+    color: red;
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+/* Style pour le signe - ( decremente ) */
+.increment_style {
+    color: green;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.product-image {
+    max-width: 100px;
+    height: auto;
+}
